@@ -289,13 +289,16 @@ resizeCanvas();
 window.addEventListener('resize', resizeCanvas, { passive: true });
 
 if (supportsPointerEvents) {
-  canvas.addEventListener('pointerdown', startStroke);
-  canvas.addEventListener('pointermove', continueStroke);
-  canvas.addEventListener('pointerup', endStroke);
-  canvas.addEventListener('pointerleave', cancelStroke);
-  canvas.addEventListener('pointercancel', cancelStroke);
-  window.addEventListener('pointerup', endStroke);
-  window.addEventListener('pointercancel', cancelStroke);
+  const pointerListenerOptions = { passive: false };
+
+  canvas.addEventListener('pointerdown', startStroke, pointerListenerOptions);
+  canvas.addEventListener('pointermove', continueStroke, pointerListenerOptions);
+  canvas.addEventListener('pointerup', endStroke, pointerListenerOptions);
+  canvas.addEventListener('pointerleave', cancelStroke, pointerListenerOptions);
+  canvas.addEventListener('pointercancel', cancelStroke, pointerListenerOptions);
+
+  window.addEventListener('pointerup', endStroke, pointerListenerOptions);
+  window.addEventListener('pointercancel', cancelStroke, pointerListenerOptions);
 } else {
   canvas.addEventListener('mousedown', startStroke);
   canvas.addEventListener('mousemove', continueStroke);
