@@ -293,7 +293,9 @@ if (supportsPointerEvents) {
   canvas.addEventListener('pointermove', continueStroke);
   canvas.addEventListener('pointerup', endStroke);
   canvas.addEventListener('pointerleave', cancelStroke);
+  canvas.addEventListener('pointercancel', cancelStroke);
   window.addEventListener('pointerup', endStroke);
+  window.addEventListener('pointercancel', cancelStroke);
 } else {
   canvas.addEventListener('mousedown', startStroke);
   canvas.addEventListener('mousemove', continueStroke);
